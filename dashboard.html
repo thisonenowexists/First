@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DHURILH Bank</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Base styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;      padding: 0;
+      background: linear-gradient(135deg, #1e1e2f, #3a3a5f);
+      color: #A6AEA6;
+    }
+
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background: linear-gradient(135deg, #3d3d60, #252547);
+      padding: 20px;
+      color: #718C92;
+      height: 89.5vh;
+      position: fixed;
+      box-shadow: 5px 0 5px rgba(229,209,205,0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sidebar img {
+      width: 70px;
+      height: 100px;
+      border-radius: 45%;
+      display: block;
+    }
+
+    .sidebar h3, .sidebar p {
+      text-align: center;
+      margin: 0px 0;
+    }
+
+    .carousel-container {
+      margin-top: 40px;
+      height: 200px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .carousel-item {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 100%;
+      transition: transform 0.5s ease-in-out, opacity 1s ease-in-out;
+      opacity: 0;
+    }
+
+    .carousel-item.active {
+      left: 0;
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    .carousel-item img {
+      display: block;
+      width: 80px;
+      height: 100px;
+      margin: 0 auto;
+    }
+
+    .carousel-item p {
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    /* Main content */
+    .main-content {
+      margin-left: 320px;
+      padding: 10px;
+    }
+
+    .navbar {
+      background: linear-gradient(135deg, #121230, #32325d);
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0px 4px 10px rgba(43,30,31,0.97);
+    }
+
+    .navbar img {
+      height: 50px;
+    }
+
+    .navbar nav {
+      flex: 1;
+      text-align: right;
+    }
+
+    .navbar nav a {
+      margin: 0 20px;
+      text-decoration: underline;
+      color: #928C8C;
+      font-size: 18px;
+    }
+
+    /* Tiles */
+    .tiles-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .tile {
+      background: linear-gradient(135deg, #4a4a77, #121227);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      position: relative;
+    }
+
+    .tile:hover {
+      transform: translateY(10px);
+      box-shadow: 0 15px 30px rgba(220,11,15,0.30);
+    }
+
+    .tile i {
+      font-size: 50px;
+      margin-bottom: 10px;
+    }
+
+    .tile p {
+      font-size: 20px;
+      margin-top: 0px;
+    }
+
+    .tile .live-update {
+      font-size: 10px;
+      color: #94A795;
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+    }
+
+    /* Chart Section */
+    .chart-container {
+      background: linear-gradient(135deg, #353540, #2A2A3A);
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    canvas {
+      width: 100% !important;
+      max-height: 200px;
+		top: 40px;
+    }
+
+    /* Enhanced left panel styles */
+    .sidebar {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .account-name {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 10px;
+      color: #A6AEA6;
+    }
+
+    .account-info {
+      font-size: 18px;
+      margin: 5px 0;
+      color: #A6AEA6;
+    }
+
+    .account-number {
+      font-weight: bold;
+      color: #718C92;
+    }
+
+    .balance {
+      font-size: 20px;
+      font-weight: bold;
+      color: #B7BDEB;
+    }
+
+    .balance-amount {
+      font-size: 35px;
+      color: #A6AEA6;
+    }
+
+    .credit-score {
+      font-size: 18px;
+      font-weight: bold;
+      color: #718C92;
+    }
+
+    .score {
+      color: #A6AEA6;
+      font-size: 20px;
+    }
+
+    .rotating-features-tile {
+      background: linear-gradient(135deg, #0E0E37, #3a3a5f);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0px 5px 15px rgba(166,190,234,0.24);
+      width: 90%;
+	  }
+    
+
+    .carousel-container {
+      height: 140px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .carousel-item {
+      position: center;
+      top: 0;
+      left: 100%;
+      width: 100%;
+      transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+      opacity: 0;
+    }
+
+    .carousel-item.active {
+      left: 0;
+      opacity: 1;
+      transform: scale(1.0);
+    }
+
+    .carousel-item img {
+      display: block;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto;
+    }
+
+    .carousel-item p {
+      text-align: center;
+      margin-top: 0px;
+      color: #F1D7D7;
+    }
+  </style>
+</head>
+<body>
+ <div class="sidebar">
+  <img src="Lesley.jpg" loading="lazy" alt="Profile">
+  <h3 class="account-name">Welcome, Lesley Oscar</h3>
+ <div class="rotating-features-tile"> <p class="account-info">Acc No: <span class="account-number">15475539976593</span></p></div>
+	<div class="rotating-features-tile"> <p class="account-info balance"> <span class="balance-amount">€ 878,418.72</span></p> <br>
+		Available Bal: € 878,422.33<br></div>
+<div class="rotating-features-tile"> <p class="account-info credit-score">Credit Score: <span class="score">795</span></p></div>
+
+  <!-- Rotating features tile -->
+  <div class="rotating-features-tile">
+    <div class="carousel-container">
+      <div class="carousel-item active">
+        <img src="visa.jpg" loading="lazy" alt="Visa Card Worldwide Acceptance">
+      </div>
+      <div class="carousel-item">
+        <img src="mastercard.jpg" loading="lazy" alt="MasterCard">
+        <p>MasterCard: Secure Payments</p>
+      </div>
+      <div class="carousel-item">
+        <img src="amex.png" loading="lazy" alt="American Express">
+        <p>AmEx: Premium Perks</p>
+      </div>
+      <div class="carousel-item">
+        <img src="bank-feature.jpg" loading="lazy" alt="New Feature">
+        <p>New Savings Offers</p>
+      </div>
+    </div>
+  </div>
+	 <div class="rotating-features-tile">
+    <div class="carousel-container">
+      <div class="carousel-item active">
+        <img src="Insurance.png" loading="lazy" alt="Insurance">
+        <p>Property Insurance</p>
+      </div>
+      <div class="carousel-item">
+        <img src="Fraud.png" loading="lazy" alt="Fraud Aleart">
+        <p>Don't share your login</p>
+      </div>
+      <div class="carousel-item">
+        <img src="Instant.png" loading="lazy" alt="Apply for a Loan today!">
+        <p>Instant loan</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="main-content">
+    <div class="navbar">
+      <img src="logo.png" loading="lazy" alt="Bank Logo">
+      <nav>
+        <a href="transactions.html">Transactions</a>
+        <a href="support.html">Contact</a>
+        <a href="login.html">Logout</a>
+      </nav>
+    </div>
+
+        <div class="tiles-container">
+      <div class="tile">
+	    <a href="transfer.html"><i> 💳</i></a>
+        <p>Send Money</p>
+      </div>
+      <div class="tile">
+        <button id="investmentsBtn" class="btn btn-primary"><i>💰</i></button>
+        <p>Investments</p>
+        <span class="live-update">Market Up <span id="market-change">2%</span></span>
+<script>
+  const marketChange = document.getElementById('market-change');
+  setInterval(() => {
+    marketChange.textContent = `${Math.floor(Math.random() * 5)}%`;
+  }, 5000);
+</script>
+      </div>
+      <div class="tile">
+        <a href="transactions.html"><i>📊</i></a>
+        <p>History Chart</p>
+      </div>
+      <div class="tile">   
+        <button id="loansInsightsBtn" class="btn btn-secondary"><i>📈</i></button>
+        <p>Loan Insights</p>
+      </div>
+	  <div class="tile">
+	    <a href="https://coinmarketcap.com"><i>🏦</i></a>
+        <p>Crypto</p>
+      </div>	
+      <div class="tile">
+        <a href="support.html"><i>📞</i></a>
+        <p>Customer Support</p>
+      </div>
+    </div>
+
+        <div class="chart-container">
+      <h3>Spending Trends</h3>
+      <canvas id="chart"></canvas>
+    </div>
+
+    <!-- New Section: 3 Grid-like Tabs -->
+    <div class="grid-tabs-container">
+      <div class="grid-tab">
+        <img src="mortgage.jpg" alt="Mortgage" class="grid-tab-image">
+        <h4>Mortgage Options</h4>
+        <p>Explore competitive mortgage plans tailored for you.</p>
+        <a href="https://www.iamexpat.de/housing/german-mortgages/types-mortgages-germany">Learn More</a>
+      </div>
+      <div class="grid-tab">
+        <img src="insurance.png" alt="Insurance" class="grid-tab-image">
+        <h4>Insurance Plans</h4>
+        <p>Protect your assets and family with our reliable insurance services.</p>
+        <a href="https://hypofriend.de/en/insurance-in-germany.ain">Get Covered</a>
+      </div>
+      <div class="grid-tab">
+        <img src="budget.jpg" alt="Budget" class="grid-tab-image">
+        <h4>Budget Planner</h4>
+        <p>Track and optimize your spending with our free planner tool.</p>
+        <a href="https://www.mymap.ai/planning-tool">Start Now</a>
+      </div>
+    </div>
+
+    <style>
+      /* Grid-like Tabs Styles */
+      .grid-tabs-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 1px;
+        margin: 60px 0;
+      }
+
+      .grid-tab {
+        flex: 1;
+        background: linear-gradient(135deg, #161622, #2A2A3A);
+        border-radius: 1px;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.5s, box-shadow 0.5s;
+      }
+
+      .grid-tab:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 10px 20px rgba(78,115,177,0.42);
+      }
+
+      .grid-tab img.grid-tab-image {
+        width: 100%;
+        max-height: 150px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+      }
+
+      .grid-tab h4 {
+        font-size: 22px;
+        margin-bottom: 10px;
+        color: #A6AEA6;
+      }
+
+      .grid-tab p {
+        font-size: 16px;
+        color: #94A795;
+        margin-bottom: 15px;
+      }
+
+      .grid-tab a {
+        text-decoration: none;
+        font-weight: bold;
+        color: #B7BDEB;
+        transition: color 0.3s;
+      }
+
+      .grid-tab a:hover {
+        color: #A6AEA6;
+      }
+    </style>
+  </div>
+	<script>
+  const ctx = document.getElementById('chart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
+        datasets: [{
+          label: 'Spending',
+          data: [38170, 28320.590, 40860, 46504.62, 33888.46, 31451.14],
+        borderColor: 'rgba(166,190,234,0.8)',
+        backgroundColor: 'rgba(166,190,234,0.2)',
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false }
+      }
+    }
+  });
+</script>
+	<div class="modal fade" id="popupModal" tabindex="-1" aria-labelledby="popupModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="popupModalLabel">Input Required</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="bscoNumber" class="form-label">Enter BSCO Number:</label>
+                            <input type="text" id="bscoNumber" class="form-control" placeholder="Enter BSCO number">
+                        </div>
+                    </form>
+                    <button id="backToDashboard" class="btn btn-link">Go Back to Dashboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Reference buttons
+        const investmentsBtn = document.getElementById('investmentsBtn');
+        const loansInsightsBtn = document.getElementById('loansInsightsBtn');
+        const backToDashboard = document.getElementById('backToDashboard');
+        
+        // Show modal
+        const popupModal = new bootstrap.Modal(document.getElementById('popupModal'));
+        
+        investmentsBtn.addEventListener('click', () => {
+            document.getElementById('popupModalLabel').textContent = 'Investments';
+            popupModal.show();
+        });
+
+        loansInsightsBtn.addEventListener('click', () => {
+            document.getElementById('popupModalLabel').textContent = 'Loans Insights';
+            popupModal.show();
+        });
+
+        // Redirect or hide modal for "Go Back to Dashboard"
+        backToDashboard.addEventListener('click', () => {
+            popupModal.hide();
+        });
+    </script>
+	<script> document.querySelector('.sidebar-toggle').addEventListener('click', () => {
+  document.querySelector('.sidebar').classList.toggle('collapsed');
+});</script>
+	<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll('.carousel-item');
+    let currentIndex = 0;
+
+    setInterval(() => {
+      items[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex + 1) % items.length;
+      items[currentIndex].classList.add('active');
+    }, 3000);
+  });
+</script>
+	<script>
+  let inactivityTimeout;
+
+  // Log the user out after 5 minutes of inactivity
+  function resetTimer() {
+    clearTimeout(inactivityTimeout);
+    inactivityTimeout = setTimeout(() => {
+      alert('Session expired due to inactivity. You will be logged out.');
+      window.location.href = 'login.html';  // Redirect to logout or login page
+    }, 300000);  // 300000 ms = 5 minutes
+  }
+
+  // Reset the timer on user activity
+  window.onload = resetTimer;
+  document.onmousemove = resetTimer;
+  document.onkeypress = resetTimer;
+</script>
+
+  <footer style="background: #121230; padding: 5px; text-align: center; color: #A6AEA6; margin-top: 25px;">
+  <p>© 2024 DHURILH Bank. All rights reserved.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer Funds</title>
+    <style>
+        
+
+        .main-content {
+            display: flex; /* Aligns children (left and right panel) side by side */
+            height: 100vh; /* Full viewport height */
+        }
+
+        .container {
+            width: 50%;
+            padding: 10px;
+            background-color: #0C1132;
+            border-right: 1px solid #2F3175;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 20px;
+        }
+/* Navbar Styles */
+.navbar {
+    background: linear-gradient(135deg, #121230, #32325d);
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0px 4px 10px rgba(137,120,121,0.39);
+    position: fixed;  /* Keeps the navbar fixed at the top */
+    top: 0;  /* Aligns the navbar at the top */
+    left: 0;
+    right: 0;
+    z-index: 1000;  /* Ensures the navbar stays on top of other content */
+}
+
+.navbar img {
+    height: 100px; /* Adjusts the logo size */
+}
+
+.navbar nav {
+    flex: 1;
+    text-align: right;  /* Aligns the navigation links to the right */
+}
+
+.navbar nav a {
+    margin: 0 20px;
+    text-decoration: underline;
+    color: #928C8C;
+    font-size: 20px;
+}
+
+/* Body content adjustments */
+body {
+    font-family: Arial, sans-serif;
+    margin: 1px;
+    padding: 1px;
+    background: linear-gradient(135deg, #1e1e2f, #3a3a5f);
+    color: #A6AEA6;
+    padding-top: 120px;  /* Adds space at the top to prevent content from hiding under the navbar */
+}
+        
+
+        label, input, select, textarea, button {
+            display: block;
+            width: 70%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #01421F;
+            color: #87836D;
+            border: #625253;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #19185A;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 9999;
+        }
+
+        .popup button {
+            margin-top: 20px;
+            background: #0B4117;
+        }
+
+        .right-panel {
+            width: 100%;
+            padding: 20px;
+            background: #0C1132;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 20px;
+            height: 100vh; /* Ensures it takes the full screen height */
+        }
+
+        .grid-tab {
+            width: 50%;
+            background: #151544;
+            color: #98908D;
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .grid-tab img {
+            width: 35%;
+            height: 30%;
+            border-radius: 10px;
+        }
+
+        footer {
+            background: #121230;
+            padding: 5px;
+            text-align: center;
+            color: #A6AEA6;
+            margin-top: 25px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main-content">
+    <div class="navbar">
+      <img src="logo.png" loading="lazy" alt="Bank Logo">
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="login.html">Logout</a>
+      </nav>
+    </div>
+
+        <div class="container">
+            <form id="transferForm">
+                <label for="bankName">Bank Name:</label>
+                <input type="text" id="bankName" name="bankName" required>
+
+                <label for="accountNumber">Account Number:</label>
+                <input type="text" id="accountNumber" name="accountNumber" required>
+
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" required oninput="calculateTotal()">
+
+                <label for="transferType">Transfer Type:</label>
+                <select id="transferType" name="transferType" onchange="toggleTransferDetails()">
+                    <option value="local">Local</option>
+                    <option value="international">International</option>
+                </select>
+
+                <label for="country">Country:</label>
+                <select id="country" name="country"></select>
+
+                <label for="blzOrSwift">BLZ Code:</label>
+                <input type="text" id="blzOrSwift" name="blzOrSwift" placeholder="Enter BLZ or SWIFT Code">
+
+                <label for="reason">Reason for Transfer:</label>
+                <textarea id="reason" name="reason" required></textarea>
+
+                <label for="transferFee">Transfer Fee:</label>
+                <span id="transferFee">1.5%</span>
+
+                <label for="totalAmount">Total:</label>
+                <input type="text" id="totalAmount" disabled>
+
+                <button type="button" id="sendCash">Send Cash</button>
+            </form>
+        </div>
+
+        <div class="right-panel">
+            <nav>
+                <div class="grid-tab">
+                    <img src="mortgage.jpg" alt="Mortgage">
+                    <h4>Mortgage Options</h4>
+                    <p>Explore competitive mortgage plans tailored for you.</p>
+                    <a href="https://www.iamexpat.de/housing/german-mortgages/types-mortgages-germany">Learn More</a>
+                </div>
+                <div class="grid-tab">
+                    <img src="insurance.png" alt="Insurance">
+                    <h4>Insurance Plans</h4>
+                    <p>Protect your assets and family with our reliable insurance services.</p>
+                    <a href="https://hypofriend.de/en/insurance-in-germany.ain">Get Covered</a>
+                </div>
+                <div class="grid-tab">
+                    <img src="budget.jpg" alt="Budget">
+                    <h4>Budget Planner</h4>
+                    <p>Track and optimize your spending with our free planner tool.</p>
+                    <a href="https://www.mymap.ai/planning-tool">Start Now</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Popups -->
+    <div id="otpPopup" class="popup">
+        <p>Enter OTP:</p>
+        <input type="text" id="otpInput">
+        <button onclick="validateOTP()">Submit</button>
+    </div>
+
+    <div id="ibanPopup" class="popup">
+        <p>Enter IBAN Code:</p>
+        <input type="text" id="ibanInput">
+        <button onclick="validateIBAN()">Submit</button>
+    </div>
+
+    <div id="successPopup" class="popup">
+        <p>Transfer Successful!</p>
+        <button onclick="window.location.href='dashboard.html'">Dashboard</button>
+        <button onclick="window.location.href='login.html'">Logout</button>
+    </div>
+
+    <footer>
+        <p>© 2024 DHURILH Bank. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // List of countries (shortened for brevity)
+        const countries = [
+            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", 
+    "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", 
+    "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", 
+    "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", 
+    "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", 
+    "Congo (Congo-Brazzaville)", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czechia (Czech Republic)", 
+    "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", 
+    "Eritrea", "Estonia", "Eswatini (fmr. \"Swaziland\")", "Ethiopia", "Fiji", "Finland", "France", "Gabon", 
+    "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", 
+    "Guyana", "Haiti", "Holy See", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", 
+    "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea (North)", 
+    "Korea (South)", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", 
+    "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", 
+    "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", 
+    "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar (Burma)", "Namibia", "Nauru", "Nepal", 
+    "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", 
+    "Pakistan", "Palau", "Palestine State", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", 
+    "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", 
+    "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", 
+    "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", 
+    "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", 
+    "Syria", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", 
+    "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", 
+    "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Yemen", 
+    "Zambia", "Zimbabwe"
+        ];
+
+        // Populate countries dropdown
+        const countrySelect = document.getElementById("country");
+        countries.forEach(country => {
+            const option = document.createElement("option");
+            option.value = country;
+            option.textContent = country;
+            countrySelect.appendChild(option);
+        });
+
+        function toggleTransferDetails() {
+            const transferType = document.getElementById("transferType").value;
+            const blzOrSwiftField = document.getElementById("blzOrSwift");
+            const fee = transferType === "local" ? "1.5%" : "2.5%";
+            document.getElementById("transferFee").innerText = fee;
+
+            blzOrSwiftField.placeholder = transferType === "local" ? "Enter BLZ Code" : "Enter SWIFT Code";
+        }
+
+        function calculateTotal() {
+            const amount = parseFloat(document.getElementById("amount").value) || 0;
+            const transferType = document.getElementById("transferType").value;
+            const feePercentage = transferType === "local" ? 0.015 : 0.025;
+            const total = amount + (amount * feePercentage);
+            document.getElementById("totalAmount").value = total.toFixed(2);
+        }
+
+        function sendCash() {
+            console.log("Send Cash button clicked");
+            const otpPopup = document.getElementById("otpPopup");
+            otpPopup.style.display = "block";
+        }
+
+        function validateOTP() {
+            const otpInput = document.getElementById("otpInput").value;
+            if (otpInput === "1234") { // Example OTP check
+                document.getElementById("otpPopup").style.display = "none";
+                document.getElementById("ibanPopup").style.display = "block";
+            } else {
+                alert("Invalid OTP");
+            }
+        }
+
+        function validateIBAN() {
+            const ibanInput = document.getElementById("ibanInput").value;
+            if (ibanInput === "IBAN1234") { // Example IBAN validation
+                document.getElementById("ibanPopup").style.display = "none";
+                document.getElementById("successPopup").style.display = "block";
+            } else {
+                alert("Invalid IBAN Code");
+            }
+        }
+
+        document.getElementById("sendCash").addEventListener("click", sendCash);
+    </script>
+</body>
+</html>

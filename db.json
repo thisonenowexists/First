@@ -1,0 +1,15 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "user1",
+      "password": "pass1",
+      "balance": 600000,
+      "transactions": [
+        {"date": "2024-11-19", "description": "Grocery Store", "amount": -250},
+        {"date": "2024-11-18", "description": "Electric Bill", "amount": -100},
+        {"date": "2024-11-17", "description": "Salary", "amount": 5000}
+      ]
+    }
+  ]
+}

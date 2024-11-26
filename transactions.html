@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History - DHURILH Bank</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+	<style>  
+		 .navbar img {
+      height: 50px;
+    }
+.navbar nav {
+      flex: 1;
+      text-align: right;
+    }
+		.navbar nav a {
+      margin: 0 20px;
+      text-decoration: underline;
+      color: #928C8C;
+      font-size: 18px;
+    }
+	.navbar {
+      background: linear-gradient(135deg, #121230, #32325d);
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0px 4px 10px rgba(43,30,31,0.97);
+    }
+		
+	</style>
+<body>
+
+        
+        <div class="navbar">
+      <img src="logo.png" alt="Bank Logo">
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="login.html">Logout</a>
+      </nav>
+    </div>
+
+
+    <main>
+        <section class="transaction-history">
+            <h1>Transaction History</h1>
+            
+            <!-- Tabs for different transaction categories -->
+            <div class="tabs">
+                <button class="tab-button active" id="recent-transactions-tab">Recent Transactions</button>
+                <button class="tab-button" id="priority-transfers-tab">Priority Transfers</button>
+                <button class="tab-button" id="utility-bills-tab">Utility Bills</button>
+            </div>
+
+          
+
+            <!-- Transaction Tables -->
+            <div class="tab-content" id="recent-transactions">
+                <h3>Recent Transactions</h3>
+                <table class="transaction-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Transaction ID</th>
+                            <th>Description</th>
+                            <th>Amount (€)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+   <!-- General Transactions -->
+<div class="tab-content" id="general-transactions">
+    <h3>General Transactions</h3>
+    <table class="transaction-table">
+     
+        <tbody>
+            <tr>
+                <td>2024-11-18</td>
+                <td>TRX123456789</td>
+                <td>Electricity Bill</td>
+                <td>-880.64</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-11-17</td>
+                <td>TRX123456788</td>
+                <td>Restaurant</td>
+                <td>-75.50</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-11-15</td>
+                <td>TRX123456787</td>
+                <td>Salary Credit</td>
+                <td>19850.00</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-11-10</td>
+                <td>TRX123456786</td>
+                <td>Supermarket</td>
+                <td>-120.00</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-11-05</td>
+                <td>TRX123456785</td>
+                <td>Subscription Service</td>
+                <td>-25.00</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-11-02</td>
+                <td>TRX123456784</td>
+                <td>House Payment</td>
+                <td>-10500.00</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-10-30</td>
+                <td>TRX123456783</td>
+                <td>Insurance Premium</td>
+                <td>-200.00</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-10-28</td>
+                <td>TRX123456782</td>
+                <td>Transfer to Savings</td>
+                <td>-300.00</td>
+                <td>Completed</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Priority Transfers -->
+<div class="tab-content" id="priority-transfers">
+    <h3>Priority Transfers</h3>
+    <table class="transaction-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Transaction ID</th>
+                <th>Description</th>
+                <th>Amount (€)</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2024-11-10</td>
+                <td>PRIORITY12345</td>
+                <td>Tax Payment</td>
+                <td>-5000.00</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-11-07</td>
+                <td>PRIORITY12346</td>
+                <td>Rent Payment</td>
+                <td>-1200.00</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-11-05</td>
+                <td>PRIORITY12347</td>
+                <td>Mortgage</td>
+                <td>-1500.00</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-11-02</td>
+                <td>PRIORITY12348</td>
+                <td>Loan Repayment</td>
+                <td>-800.00</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-10-30</td>
+                <td>PRIORITY12349</td>
+                <td>Utility Bills</td>
+                <td>-250.00</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-10-28</td>
+                <td>PRIORITY12350</td>
+                <td>Tax Deduction</td>
+                <td>-1200.00</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-10-26</td>
+                <td>PRIORITY12351</td>
+                <td>Tax Refund</td>
+                <td>1000.00</td>
+                <td>Completed</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Utility Bills -->
+<div class="tab-content" id="utility-bills">
+    <h3>Utility Bills</h3>
+    <table class="transaction-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Transaction ID</th>
+                <th>Description</th>
+                <th>Amount (€)</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2024-11-18</td>
+                <td>UTIL123456789</td>
+                <td>Water Bill</td>
+                <td>-50.00</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-11-16</td>
+                <td>UTIL123456788</td>
+                <td>Electricity Bill</td>
+                <td>-75.00</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-11-14</td>
+                <td>UTIL123456787</td>
+                <td>Internet Bill</td>
+                <td>-35.00</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-11-11</td>
+                <td>UTIL123456786</td>
+                <td>Gas Bill</td>
+                <td>-40.00</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-11-09</td>
+                <td>UTIL123456785</td>
+                <td>Mobile Bill</td>
+                <td>-20.00</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-11-06</td>
+                <td>UTIL123456784</td>
+                <td>Water Bill</td>
+                <td>-50.00</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>2024-11-03</td>
+                <td>UTIL123456783</td>
+                <td>Electricity Bill</td>
+                <td>-75.00</td>
+                <td>Completed</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+                        <!-- More utility bills here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Chart for Spending Trends -->
+            <div class="spending-chart">
+                <h3>Spending Trends</h3>
+                <canvas id="spendingChart"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Data for the spending trends chart
+        const spendingData = {
+            labels: ['May', 'June', 'July', 'Aug', 'Sep', 'Oct'],
+            datasets: [{
+                label: 'Spending (€)',
+                data: [15800, 44760, 35230, 28520, 31000, 28760],
+                borderColor: '#E83B27',
+                backgroundColor: 'rgba(41, 128, 185, 0.2)',
+                borderWidth: 3,
+                tension: 0.4
+            }]
+        };
+
+        const spendingConfig = {
+            type: 'line',
+            data: spendingData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                },
+                interaction: {
+                    mode: 'nearest',
+                    axis: 'x',
+                    intersect: false,
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: 'white',
+                        },
+                    },
+                    y: {
+                        ticks: {
+                            color: 'white',
+                        },
+                    },
+                },
+            },
+        };
+
+        var spendingChart = new Chart(
+            document.getElementById('spendingChart'),
+            spendingConfig
+        );
+
+        // Tab functionality
+        document.getElementById('recent-transactions-tab').addEventListener('click', function() {
+            showTab('recent-transactions');
+        });
+
+        document.getElementById('priority-transfers-tab').addEventListener('click', function() {
+            showTab('priority-transfers');
+        });
+
+        document.getElementById('utility-bills-tab').addEventListener('click', function() {
+            showTab('utility-bills');
+        });
+
+        function showTab(tabId) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.style.display = 'none';
+            });
+            const activeTab = document.getElementById(tabId);
+            activeTab.style.display = 'block';
+
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(tabId + '-tab').classList.add('active');
+        }
+
+        // Initialize the first tab to be visible by default
+        showTab('recent-transactions');
+    </script>
+   <footer style="background: #121230; padding: 5px; text-align: center; color: #A6AEA6; margin-top: 25px;">
+  <p>© 2024 DHURILH Bank. All rights reserved.</p>
+</footer>
+</body>
+</html>
