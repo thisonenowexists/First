@@ -140,66 +140,53 @@ body {
             bottom: 0;
             width: 100%;
         }
-		
-		@media (max-width: 768px) {
-    .main-content {
-        flex-direction: column; /* Stack the left and right panels on smaller screens */
-        height: auto; /* Allow the height to adjust based on content */
-    }
 
-    .container {
-        width: 100%; /* Full width for container on smaller screens */
-        padding: 10px;
-        border-right: none; /* Remove the border on smaller screens */
-    }
+		 /* Responsive styles for mobile screens */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 100%; /* Full width for mobile */
+    height: auto; /* Adjust height dynamically */
+    position: relative; /* Ensure it flows naturally in the layout */
+    padding: 10px; /* Reduce padding */
+    box-shadow: none; /* Remove shadow for simplicity */
+  }
 
-    .navbar {
-        padding: 10px 10px;
-        flex-direction: column; /* Stack navbar items vertically */
-        align-items: center; /* Center align the items */
-    }
+  .sidebar img {
+    width: 50px; /* Smaller profile image */
+    height: 50px;
+    margin-bottom: 10px; /* Add some space below */
+  }
 
-    .navbar img {
-        height: 80px; /* Resize the logo for smaller screens */
-    }
+  .sidebar h3, .sidebar p {
+    font-size: 16px; /* Smaller text */
+    margin-bottom: 5px; /* Add spacing between elements */
+  }
 
-    .navbar nav a {
-        margin: 10px 0; /* Add spacing between nav links */
-        font-size: 16px; /* Reduce font size for mobile */
-    }
+  .rotating-features-tile {
+    width: 100%; /* Full width for tiles */
+    margin-bottom: 10px; /* Add spacing between tiles */
+  }
 
-    body {
-        padding-top: 100px; /* Adjust for the smaller header */
-    }
+  .main-content {
+    margin-left: 0; /* Remove margin for full-width content */
+    padding: 10px; /* Adjust padding */
+  }
 
-    label, input, select, textarea, button {
-        width: 90%; /* Make inputs and buttons wider on small screens */
-        margin: 10px 0; /* Reduce margin */
-    }
+  .navbar {
+    flex-wrap: wrap; /* Stack items if needed */
+    text-align: center;
+  }
 
-    .right-panel {
-        width: 100%; /* Take full width */
-        padding: 10px;
-        height: auto; /* Allow content to determine the height */
-    }
+  .tiles-container {
+    grid-template-columns: 1fr; /* Single column grid */
+  }
 
-    .grid-tab {
-        width: 100%; /* Make grid tabs full width */
-        margin-bottom: 20px; /* Add space between grid tabs */
-    }
-
-    .grid-tab img {
-        width: 70%; /* Resize images for better visibility */
-        height: auto; /* Let images resize proportionally */
-    }
-
-    footer {
-        position: relative; /* Make footer scrollable with content */
-        padding: 10px;
-    }
+  .grid-tabs-container {
+    flex-direction: column; /* Stack tabs vertically */
+    gap: 10px; /* Add spacing between tabs */
+  }
 }
 		
-
     </style>
 </head>
 <body>
