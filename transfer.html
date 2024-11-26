@@ -140,6 +140,65 @@ body {
             bottom: 0;
             width: 100%;
         }
+		
+		@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column; /* Stack the left and right panels on smaller screens */
+        height: auto; /* Allow the height to adjust based on content */
+    }
+
+    .container {
+        width: 100%; /* Full width for container on smaller screens */
+        padding: 10px;
+        border-right: none; /* Remove the border on smaller screens */
+    }
+
+    .navbar {
+        padding: 10px 10px;
+        flex-direction: column; /* Stack navbar items vertically */
+        align-items: center; /* Center align the items */
+    }
+
+    .navbar img {
+        height: 80px; /* Resize the logo for smaller screens */
+    }
+
+    .navbar nav a {
+        margin: 10px 0; /* Add spacing between nav links */
+        font-size: 16px; /* Reduce font size for mobile */
+    }
+
+    body {
+        padding-top: 100px; /* Adjust for the smaller header */
+    }
+
+    label, input, select, textarea, button {
+        width: 90%; /* Make inputs and buttons wider on small screens */
+        margin: 10px 0; /* Reduce margin */
+    }
+
+    .right-panel {
+        width: 100%; /* Take full width */
+        padding: 10px;
+        height: auto; /* Allow content to determine the height */
+    }
+
+    .grid-tab {
+        width: 100%; /* Make grid tabs full width */
+        margin-bottom: 20px; /* Add space between grid tabs */
+    }
+
+    .grid-tab img {
+        width: 70%; /* Resize images for better visibility */
+        height: auto; /* Let images resize proportionally */
+    }
+
+    footer {
+        position: relative; /* Make footer scrollable with content */
+        padding: 10px;
+    }
+}
+		
 
     </style>
 </head>
